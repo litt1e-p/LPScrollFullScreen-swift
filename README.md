@@ -1,2 +1,2 @@
 # LPScrollFullScreen-swift
-swift version for scrollFullScreen
+swift rewrite version for scrollFullScreen

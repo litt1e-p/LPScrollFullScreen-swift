@@ -60,12 +60,8 @@
 		3C237FE01C487EC1002F7A9D /* LPScrollFullScreen-swift */ = {
 			isa = PBXGroup;
 			children = (
+				3CE9FEDE1C4C77060090C4D8 /* Supporting Files */,
 				3C237FF31C487ECF002F7A9D /* LPScrollFullScreen-swift */,
-				3C237FE11C487EC1002F7A9D /* AppDelegate.swift */,
-				3C237FE81C487EC1002F7A9D /* Assets.xcassets */,
-				3C237FED1C487EC1002F7A9D /* Info.plist */,
-				3C237FEA1C487EC1002F7A9D /* LaunchScreen.storyboard */,
-				3C237FE51C487EC1002F7A9D /* Main.storyboard */,
 				3C237FF81C48E827002F7A9D /* TableViewController.swift */,
 				3C237FE31C487EC1002F7A9D /* ViewController.swift */,
 			);
@@ -79,6 +75,18 @@
 				3C237FF41C487EE6002F7A9D /* UIViewControllerExtension.swift */,
 			);
 			path = "LPScrollFullScreen-swift";
+			sourceTree = "<group>";
+		};
+		3CE9FEDE1C4C77060090C4D8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C237FE11C487EC1002F7A9D /* AppDelegate.swift */,
+				3C237FE81C487EC1002F7A9D /* Assets.xcassets */,
+				3C237FED1C487EC1002F7A9D /* Info.plist */,
+				3C237FEA1C487EC1002F7A9D /* LaunchScreen.storyboard */,
+				3C237FE51C487EC1002F7A9D /* Main.storyboard */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

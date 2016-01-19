@@ -4,7 +4,7 @@ swift rewrite version for scrollFullScreen simply to use with 2 line codes only
 
 # Additional
 
-OC version is [here](https://github.com/litt1e-p/LPScrollFullScreen)
+Objective C version is [here](https://github.com/litt1e-p/LPScrollFullScreen)
 
 # Installation
 

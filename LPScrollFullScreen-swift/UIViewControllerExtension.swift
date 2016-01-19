@@ -28,7 +28,7 @@ extension UIViewController {
         if IOS8_OR_LATER {
             return statuBarFrameSize.height
         }
-        return UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? statuBarFrameSize.height : statuBarFrameSize.width
+        return UIApplication.sharedApplication().statusBarOrientation == .Portrait ? statuBarFrameSize.height : statuBarFrameSize.width
     }
     
     func hideNavigationBar(animated:Bool) {
@@ -91,7 +91,7 @@ extension UIViewController {
         if IOS8_OR_LATER {
             viewHeight = viewSize.height
         } else {
-            viewHeight = UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? viewSize.height : viewSize.width
+            viewHeight = UIApplication.sharedApplication().statusBarOrientation == .Portrait ? viewSize.height : viewSize.width
         }
         return viewHeight
     }

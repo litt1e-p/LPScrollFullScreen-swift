@@ -29,7 +29,7 @@ class TableViewController: UITableViewController {
         return data
     }
 
-    // MARK: - Table view data source
+    // MARK: - UITable view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

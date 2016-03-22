@@ -28,6 +28,7 @@ webView?.scrollView.delegate = scrollProxy
 # Release Notes
 
 - 1.0.0
+`first release version`
 
 # License
 

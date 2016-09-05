@@ -9,15 +9,16 @@
 import Foundation
 import UIKit
 
-enum LPScrollDirection {
+enum LPScrollDirection
+{
     case LPScrollDirectionNone
     case LPScrollDirectionUp
     case LPScrollDirectionDown
 }
 
-class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, UIWebViewDelegate {
-    
-    weak var delegate: LPScrollFullscreenDelegate?
+class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, UIWebViewDelegate
+{
+    weak var delegate: LPScrolldelegate?
     var upThresholdY: CGFloat // up distance until fire. default 0 px.
     var downThresholdY: CGFloat // down distance until fire. default 200 px
     
@@ -173,6 +174,13 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
 //
 //    }
     
+    override func forwardingTargetForSelector(aSelector: Selector) -> AnyObject? {
+        if forwardTarget!.respondsToSelector(aSelector) {
+            return forwardTarget
+        }
+        return nil;
+    }
+    
     override func respondsToSelector(aSelector: Selector) -> Bool {
         var ret = super.respondsToSelector(aSelector)
         if !ret {
@@ -190,15 +198,15 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
     }
 }
 
-private extension LPScrollFullScreen {
-    
+private extension LPScrollFullScreen
+{
     func detectScrollDirection(currentOffsetY: CGFloat, previousOffsetY: CGFloat) -> LPScrollDirection {
         return currentOffsetY > previousOffsetY ? .LPScrollDirectionUp : currentOffsetY < previousOffsetY ? .LPScrollDirectionDown : .LPScrollDirectionNone;
     }
 }
 
-protocol LPScrollFullscreenDelegate: NSObjectProtocol {
-    
+protocol LPScrolldelegate: NSObjectProtocol
+{
     func scrollFullScreen(fullScreenProxy: LPScrollFullScreen, scrollViewDidScrollUp deltaY: CGFloat)
     func scrollFullScreen(fullScreenProxy: LPScrollFullScreen, scrollViewDidScrollDown deltaY: CGFloat)
     func scrollFullScreenScrollViewDidEndDraggingScrollUp(fullScreenProxy: LPScrollFullScreen)

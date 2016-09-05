@@ -8,18 +8,25 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController
+{
     
     var data: NSMutableArray = []
     var scrollProxy: LPScrollFullScreen?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "TableView"
-        self.setUpData()
+        title = "TableView base on storyboard"
+        setUpData()
         scrollProxy = LPScrollFullScreen(forwardTarget: self)
-        self.tableView.delegate = scrollProxy!
+        tableView.delegate = scrollProxy!
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        showTabBar(false)
+        showNavigationBar(false)
+        showToolbar(false)
     }
     
     func setUpData() -> NSMutableArray {
@@ -27,6 +34,14 @@ class TableViewController: UITableViewController {
             data.addObject(i)
         }
         return data
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        navigationController?.pushViewController(TableView2Controller(), animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100;
     }
 
     // MARK: - UITable view data source

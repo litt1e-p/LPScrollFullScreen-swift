@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0417B15F1D7DB101007C7501 /* TableView2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417B15E1D7DB101007C7501 /* TableView2Controller.swift */; };
 		3C237FE21C487EC1002F7A9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C237FE11C487EC1002F7A9D /* AppDelegate.swift */; };
 		3C237FE41C487EC1002F7A9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C237FE31C487EC1002F7A9D /* ViewController.swift */; };
 		3C237FE71C487EC1002F7A9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C237FE51C487EC1002F7A9D /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0417B15E1D7DB101007C7501 /* TableView2Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView2Controller.swift; sourceTree = "<group>"; };
 		3C237FDE1C487EC1002F7A9D /* LPScrollFullScreen-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LPScrollFullScreen-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C237FE11C487EC1002F7A9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C237FE31C487EC1002F7A9D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		3C237FE01C487EC1002F7A9D /* LPScrollFullScreen-swift */ = {
 			isa = PBXGroup;
 			children = (
+				0417B15E1D7DB101007C7501 /* TableView2Controller.swift */,
 				3CE9FEDE1C4C77060090C4D8 /* Supporting Files */,
 				3C237FF31C487ECF002F7A9D /* LPScrollFullScreen-swift */,
 				3C237FF81C48E827002F7A9D /* TableViewController.swift */,
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0417B15F1D7DB101007C7501 /* TableView2Controller.swift in Sources */,
 				3C237FE41C487EC1002F7A9D /* ViewController.swift in Sources */,
 				3C237FF71C4884D5002F7A9D /* LPScrollFullscreen.swift in Sources */,
 				3C237FE21C487EC1002F7A9D /* AppDelegate.swift in Sources */,

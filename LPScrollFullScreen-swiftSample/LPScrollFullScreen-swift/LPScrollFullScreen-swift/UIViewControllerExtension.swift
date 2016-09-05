@@ -65,7 +65,7 @@ extension UIViewController {
             self.navigationController?.navigationBar.frame = frame!
             var index = 0
             for view: UIView in (self.navigationController?.navigationBar.subviews)! {
-                index++
+                index += 1
                 if index == 1 || view.hidden || view.alpha <= 0.0 {
                     continue
                 }

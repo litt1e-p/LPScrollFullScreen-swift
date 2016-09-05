@@ -9,15 +9,16 @@
 import Foundation
 import UIKit
 
-enum LPScrollDirection {
+enum LPScrollDirection
+{
     case LPScrollDirectionNone
     case LPScrollDirectionUp
     case LPScrollDirectionDown
 }
 
-class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, UIWebViewDelegate {
-    
-    weak var delegate: LPScrollFullscreenDelegate?
+class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, UIWebViewDelegate
+{
+    weak var delegate: LPScrolldelegate?
     var upThresholdY: CGFloat // up distance until fire. default 0 px.
     var downThresholdY: CGFloat // down distance until fire. default 200 px
     
@@ -44,8 +45,8 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if forwardTarget!.respondsToSelector("scrollViewDidScroll:") {
-            forwardTarget!.scrollViewDidScroll!(scrollView)
+        if forwardTarget!.respondsToSelector(#selector(UIScrollViewDelegate.scrollViewDidScroll(_:))) {
+            forwardTarget!.scrollViewDidScroll(scrollView)
         }
         let currentOffsetY = scrollView.contentOffset.y
         let currentScrollDirection = detectScrollDirection(currentOffsetY, previousOffsetY: previousOffsetY)
@@ -65,7 +66,7 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
             case .LPScrollDirectionUp:
                 let isOverThreshold = accumulatedY < -upThresholdY
                 if isOverThreshold || isOverBottomBoundary {
-                    guard ((delegate?.respondsToSelector("scrollFullScreen:scrollViewDidScrollUp:")) != nil) else {
+                    guard ((delegate?.respondsToSelector(#selector(LPScrolldelegate.scrollFullScreen(_:scrollViewDidScrollUp:)))) != nil) else {
                         let forwardTargetVc = forwardTarget as! UIViewController
                         forwardTargetVc.moveNavigationBar(deltaY, animated: true)
                         forwardTargetVc.moveTabBar(-deltaY, animated: true)
@@ -77,7 +78,7 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
             case .LPScrollDirectionDown:
                 let isOverThreshold = accumulatedY > downThresholdY
                 if isOverThreshold || isOverTopBoundary {
-                    guard ((delegate?.respondsToSelector("scrollFullScreen:scrollViewDidScrollDown:")) != nil) else {
+                    guard ((delegate?.respondsToSelector(#selector(LPScrolldelegate.scrollFullScreen(_:scrollViewDidScrollDown:)))) != nil) else {
                         let forwardTargetVc = forwardTarget as! UIViewController
                         forwardTargetVc.moveNavigationBar(deltaY, animated: true)
                         forwardTargetVc.moveTabBar(-deltaY, animated: true)
@@ -98,7 +99,7 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if forwardTarget!.respondsToSelector("scrollViewDidEndDragging:willDecelerate:") {
+        if forwardTarget!.respondsToSelector(#selector(UIScrollViewDelegate.scrollViewDidEndDragging(_:willDecelerate:))) {
             forwardTarget!.scrollViewDidEndDragging!(scrollView, willDecelerate: decelerate)
         }
         let currentOffsetY = scrollView.contentOffset.y
@@ -109,7 +110,7 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
                 let isOverThreshold = accumulatedY < -upThresholdY
                 let isOverBottomBoundary = currentOffsetY >= bottomBoundary
                 if isOverThreshold || isOverBottomBoundary {
-                    guard ((delegate?.respondsToSelector("scrollFullScreenScrollViewDidEndDraggingScrollUp:")) != nil) else {
+                    guard ((delegate?.respondsToSelector(#selector(LPScrolldelegate.scrollFullScreenScrollViewDidEndDraggingScrollUp(_:)))) != nil) else {
                         let forwardTargetVc = forwardTarget as! UIViewController
                         forwardTargetVc.hideNavigationBar(true)
                         forwardTargetVc.hideTabBar(true)
@@ -122,7 +123,7 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
                 let isOverThreshold = accumulatedY > downThresholdY
                 let isOverTopBoundary = currentOffsetY <= topBoundary
                 if isOverThreshold || isOverTopBoundary {
-                    guard ((delegate?.respondsToSelector("scrollFullScreenScrollViewDidEndDraggingScrollDown:")) != nil) else {
+                    guard ((delegate?.respondsToSelector(#selector(LPScrolldelegate.scrollFullScreenScrollViewDidEndDraggingScrollDown(_:)))) != nil) else {
                         let forwardTargetVc = forwardTarget as! UIViewController
                         forwardTargetVc.showNavigationBar(true)
                         forwardTargetVc.showTabBar(true)
@@ -149,10 +150,10 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
     
     func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
         var ret = true
-        if ((forwardTarget?.respondsToSelector("scrollViewShouldScrollToTop:")) != nil) {
+        if ((forwardTarget?.respondsToSelector(#selector(UIScrollViewDelegate.scrollViewShouldScrollToTop(_:)))) != nil) {
             ret = (forwardTarget?.scrollViewShouldScrollToTop!(scrollView))!
         }
-        if ((delegate?.respondsToSelector("scrollFullScreenScrollViewDidEndDraggingScrollDown:")) != nil) {
+        if ((delegate?.respondsToSelector(#selector(LPScrolldelegate.scrollFullScreenScrollViewDidEndDraggingScrollDown(_:)))) != nil) {
             delegate!.scrollFullScreenScrollViewDidEndDraggingScrollDown(self)
         } else {
             let forwardTargetVc = forwardTarget as! UIViewController
@@ -173,6 +174,13 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
 //
 //    }
     
+    override func forwardingTargetForSelector(aSelector: Selector) -> AnyObject? {
+        if forwardTarget!.respondsToSelector(aSelector) {
+            return forwardTarget
+        }
+        return nil;
+    }
+    
     override func respondsToSelector(aSelector: Selector) -> Bool {
         var ret = super.respondsToSelector(aSelector)
         if !ret {
@@ -190,15 +198,15 @@ class LPScrollFullScreen: NSObject, UIScrollViewDelegate, UITableViewDelegate, U
     }
 }
 
-private extension LPScrollFullScreen {
-    
+private extension LPScrollFullScreen
+{
     func detectScrollDirection(currentOffsetY: CGFloat, previousOffsetY: CGFloat) -> LPScrollDirection {
         return currentOffsetY > previousOffsetY ? .LPScrollDirectionUp : currentOffsetY < previousOffsetY ? .LPScrollDirectionDown : .LPScrollDirectionNone;
     }
 }
 
-protocol LPScrollFullscreenDelegate: NSObjectProtocol {
-    
+@objc protocol LPScrolldelegate: NSObjectProtocol
+{
     func scrollFullScreen(fullScreenProxy: LPScrollFullScreen, scrollViewDidScrollUp deltaY: CGFloat)
     func scrollFullScreen(fullScreenProxy: LPScrollFullScreen, scrollViewDidScrollDown deltaY: CGFloat)
     func scrollFullScreenScrollViewDidEndDraggingScrollUp(fullScreenProxy: LPScrollFullScreen)

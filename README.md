@@ -27,6 +27,10 @@ webView?.scrollView.delegate = scrollProxy
 
 # Release Notes
 
+- 1.0.1
+
+`fix bug of swift dynamic forward target`
+
 - 1.0.0
 
 `first release version`

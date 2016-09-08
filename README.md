@@ -9,7 +9,7 @@ Objective C version is [here](https://github.com/litt1e-p/LPScrollFullScreen)
 # Installation
 
 ```swift
-pod 'LPScrollFullScreen-swift', '~> 1.0.0'
+pod 'LPScrollFullScreen-swift', '~> 1.0.1'
 ```
 
 ```swift

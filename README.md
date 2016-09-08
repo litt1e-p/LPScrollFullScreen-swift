@@ -1,6 +1,6 @@
 # LPScrollFullScreen-swift
 
-swift rewrite version for scrollFullScreen simply to use with 2 line codes only
+scroll to full screen with 2 line codes only and rewrite with Swift
 
 # Additional
 

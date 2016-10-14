@@ -5,6 +5,7 @@ scroll to full screen with 2 line codes only and rewrite with Swift
 # Additional
 
 Objective C version is [here](https://github.com/litt1e-p/LPScrollFullScreen)
+Swift3 version is coming soon
 
 # Installation
 
